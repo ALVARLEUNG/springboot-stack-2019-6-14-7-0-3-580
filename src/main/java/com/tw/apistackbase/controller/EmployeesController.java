@@ -18,5 +18,13 @@ public class EmployeesController {
         return Employee.createTestEmployees();
     }
 
-    
+
+    @PostMapping
+    public List<Employee> addEmployee (@RequestBody Employee employee) {
+        List<Employee> employees = Employee.createTestEmployees();
+        employees.add(employee);
+        return employees;
+    }
+
+
 }
