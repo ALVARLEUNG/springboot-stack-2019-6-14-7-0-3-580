@@ -29,5 +29,18 @@ public class EmployeesController {
         employees.removeAll(employees.stream().filter(i -> i.getId().equals(id)).collect(Collectors.toList()));
         return employees;
     }
-    
+
+    @PutMapping
+    public List<Employee> updateEmployee ( @RequestBody Employee employee) {
+        List<Employee> employees = Employee.createTestEmployees();
+        for (Employee employee1 : employees) {
+            if (employee1.getId().equals(employee.getId())) {
+                employee1.setGender(employee.getGender());
+                employee1.setAge(employee.getAge());
+                employee1.setName(employee.getName());
+            }
+        }
+        return employees;
+    }
+
 }
