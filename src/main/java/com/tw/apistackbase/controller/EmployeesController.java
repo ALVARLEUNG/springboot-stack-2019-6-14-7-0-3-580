@@ -1,17 +1,14 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeesController {
-
 
     @GetMapping
     public List<Employee> getEmployees () {
@@ -26,5 +23,11 @@ public class EmployeesController {
         return employees;
     }
 
-
+    @DeleteMapping(value = "/{id}")
+    public List<Employee> addEmployee (@PathVariable String id) {
+        List<Employee> employees = Employee.createTestEmployees();
+        employees.removeAll(employees.stream().filter(i -> i.getId().equals(id)).collect(Collectors.toList()));
+        return employees;
+    }
+    
 }
